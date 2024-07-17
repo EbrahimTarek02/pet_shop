@@ -19,77 +19,82 @@ class PetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     String imageUrl = convertGoogleDriveLink(pet.image); // Use your actual image link here
 
-    return Container(
-      margin: EdgeInsets.only(top: 18),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadowColor,
-            spreadRadius: 2,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
-          )
-        ],
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 4,
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.fill,
-              height: MediaQuery.sizeOf(context).height * 0.15,
-              errorBuilder: (context, error, stackTrace) {
-                return Center(
-                  child: Text('Failed to load image'),
-                );
-              },
-            ),
-          ),
-          Expanded(
-            flex: 6,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    pet.category,
-                    style: GoogleFonts.balsamiqSans(
-                      fontSize: 22,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  Text(
-                    pet.type, // Assuming you have a description field in Pet
-                    style: GoogleFonts.balsamiqSans(
-                      fontSize: 15,
-                      color: AppColors.subTitleTextColor,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      ImageIcon(
-                        AssetImage(AppAssets.petLovIcon),
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        "Pet Love: ${pet.loveCount}",
-                        style: GoogleFonts.balsamiqSans(
-                          fontSize: 15,
-                          color: AppColors.accentColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+    return InkWell(
+      onTap: () {
+        // Navigator.popAndPushNamed(context, "PetScreen.routeName");
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 18),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.shadowColor,
+              spreadRadius: 2,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
+            )
+          ],
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 4,
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.fill,
+                height: MediaQuery.sizeOf(context).height * 0.15,
+                errorBuilder: (context, error, stackTrace) {
+                  return Center(
+                    child: Text('Failed to load image'),
+                  );
+                },
               ),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 6,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      pet.category,
+                      style: GoogleFonts.balsamiqSans(
+                        fontSize: 22,
+                        color: AppColors.black,
+                      ),
+                    ),
+                    Text(
+                      pet.type, // Assuming you have a description field in Pet
+                      style: GoogleFonts.balsamiqSans(
+                        fontSize: 15,
+                        color: AppColors.subTitleTextColor,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        ImageIcon(
+                          AssetImage(AppAssets.petLovIcon),
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          "Pet Love: ${pet.loveCount}",
+                          style: GoogleFonts.balsamiqSans(
+                            fontSize: 15,
+                            color: AppColors.accentColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
